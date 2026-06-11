@@ -1,0 +1,2931 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#e9162b">
+  <title>选择权补给站 | 朗圣药业 H5</title>
+  <style>
+    :root {
+      --red: #e9162b;
+      --red-deep: #9d0718;
+      --blue: #129fe2;
+      --orange: #ff8a58;
+      --gold: #ffd23a;
+      --pink: #ffe4ea;
+      --blush: #fff2f3;
+      --paper: #fffaf6;
+      --ink: #21191b;
+      --muted: #756970;
+      --line: rgba(143, 70, 86, .15);
+      --card: rgba(255, 255, 255, .78);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      overflow: hidden;
+      background: #171515;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+
+    button {
+      border: 0;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .app {
+      position: relative;
+      width: min(100vw, 430px);
+      height: min(100dvh, 932px);
+      min-height: 0;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(145deg, rgba(255, 233, 229, .92) 0%, rgba(255, 248, 241, .96) 44%, rgba(235, 248, 255, .96) 100%);
+    }
+
+    .app::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      opacity: .58;
+      background-image:
+        linear-gradient(rgba(226, 156, 166, .2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 205, 226, .2) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.95), transparent 82%);
+    }
+
+    .app::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -210px;
+      bottom: -180px;
+      z-index: -2;
+      border-radius: 56% 44% 50% 50%;
+      background: rgba(233, 22, 43, .07);
+      transform: rotate(-18deg);
+    }
+
+    .brand-atmosphere {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .brand-atmosphere span {
+      position: absolute;
+      display: block;
+      opacity: .42;
+      transform: rotate(var(--r));
+    }
+
+    .brand-atmosphere .petal {
+      width: 78px;
+      height: 30px;
+      border-radius: 80% 20% 80% 20%;
+      background: rgba(233, 22, 43, .11);
+    }
+
+    .brand-atmosphere .petal.alt {
+      background: rgba(18, 159, 226, .12);
+    }
+
+    .brand-atmosphere .heart {
+      width: 44px;
+      height: 40px;
+      opacity: .16;
+    }
+
+    .brand-atmosphere .heart::before,
+    .brand-atmosphere .heart::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 36px;
+      border-radius: 24px 24px 0 0;
+      background: var(--red);
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .brand-atmosphere .heart::after {
+      left: 20px;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+      background: var(--blue);
+    }
+
+    @media (min-width: 720px) and (min-height: 760px) {
+      .app {
+        border-radius: 30px;
+        box-shadow: 0 28px 90px rgba(0,0,0,.42);
+      }
+    }
+
+    .top {
+      position: absolute;
+      z-index: 30;
+      top: calc(10px + var(--safe-top));
+      left: 18px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 46px;
+      padding: 5px 9px;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 8px;
+      color: rgba(25, 23, 23, .75);
+      background: rgba(255,255,255,.52);
+      backdrop-filter: blur(12px);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .logo {
+      height: 18px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .progress-wrap {
+      display: grid;
+      justify-items: end;
+      gap: 5px;
+    }
+
+    .progress-label {
+      color: rgba(25, 23, 23, .52);
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .progress {
+      width: 82px;
+      height: 5px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: rgba(25, 23, 23, .1);
+    }
+
+    .progress span {
+      display: block;
+      width: var(--progress);
+      height: 100%;
+      background: linear-gradient(90deg, var(--red), var(--orange), var(--gold), var(--blue));
+      transition: width .28s ease;
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: calc(108px + var(--safe-top)) 22px calc(24px + var(--safe-bottom));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      opacity: 0;
+      transform: translateX(18px);
+      pointer-events: none;
+      transition: opacity .24s ease, transform .24s ease;
+    }
+
+    .screen::-webkit-scrollbar {
+      display: none;
+    }
+
+    .screen.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .stage {
+      flex: 0 0 auto;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .screen[data-screen="0"] .stage {
+      justify-content: start;
+      gap: 11px;
+    }
+
+    .cover-copy {
+      margin-top: 14px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 26px;
+      height: 2px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--red), var(--orange));
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    .title {
+      color: var(--ink);
+      font-size: clamp(31px, 8.8vw, 40px);
+      line-height: 1.07;
+      font-weight: 950;
+      text-wrap: balance;
+    }
+
+    .title.small {
+      font-size: clamp(25px, 7.1vw, 33px);
+      line-height: 1.1;
+    }
+
+    .cover-title {
+      font-size: clamp(34px, 8.5vw, 40px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .screen[data-screen="0"] .lead {
+      max-width: 370px;
+      line-height: 1.48;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 330px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.58;
+      font-weight: 650;
+    }
+
+    .actions {
+      position: relative;
+      z-index: 32;
+      flex: 0 0 auto;
+      display: grid;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 14px;
+    }
+
+    .btn {
+      min-height: 54px;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 18px;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), #ff4c54);
+      box-shadow: 0 16px 34px rgba(233, 22, 43, .2), inset 0 1px 0 rgba(255,255,255,.25);
+      font-size: 16px;
+      font-weight: 950;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .btn:active {
+      transform: scale(.985);
+      box-shadow: 0 8px 18px rgba(233, 22, 43, .18);
+    }
+
+    .btn.secondary {
+      color: var(--ink);
+      background: rgba(255,255,255,.76);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 26px rgba(145, 64, 78, .08);
+    }
+
+    .btn:disabled {
+      opacity: .52;
+      cursor: default;
+      transform: none;
+      box-shadow: none;
+      filter: saturate(.72);
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 356px;
+      display: grid;
+      place-items: start center;
+    }
+
+    .supply-kit {
+      position: relative;
+      width: min(100%, 356px);
+      height: 344px;
+      display: grid;
+      place-items: center;
+    }
+
+    .kit-aura {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      width: 318px;
+      height: 236px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 44% 42%, rgba(255,255,255,.82), rgba(255,221,229,.38) 36%, transparent 70%),
+        radial-gradient(circle at 64% 58%, rgba(18,159,226,.2), transparent 58%);
+      filter: blur(2px);
+      opacity: .94;
+      transform: translate(-50%, -50%);
+      animation: kitGlow 3.8s ease-in-out infinite;
+    }
+
+    .kit-ribbon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 308px;
+      height: 132px;
+      border: 2px solid rgba(233, 22, 43, .16);
+      border-bottom-color: rgba(18, 159, 226, .3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) rotate(-8deg);
+      opacity: .78;
+      animation: spin 16s linear infinite;
+    }
+
+    .kit-ribbon::after {
+      content: "";
+      position: absolute;
+      inset: 18px 28px;
+      border: 2px dashed rgba(255, 138, 88, .38);
+      border-radius: 50%;
+    }
+
+    .kit-box {
+      position: absolute;
+      left: 50%;
+      bottom: 52px;
+      z-index: 8;
+      width: 306px;
+      height: 166px;
+      transform: translateX(-50%);
+    }
+
+    .kit-lid {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      top: 4px;
+      height: 42px;
+      border-radius: 18px 18px 10px 10px;
+      background:
+        linear-gradient(90deg, rgba(233,22,43,.95), rgba(255,138,88,.88) 48%, rgba(18,159,226,.82)),
+        linear-gradient(180deg, rgba(255,255,255,.38), transparent);
+      box-shadow: 0 18px 34px rgba(110, 34, 49, .18), inset 0 1px 0 rgba(255,255,255,.36);
+      transform-origin: center bottom;
+      animation: lidOpen 2.9s cubic-bezier(.2,.8,.2,1) .35s both;
+    }
+
+    .kit-body {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 116px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.64);
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.84), rgba(255,232,236,.84) 40%, rgba(230,248,255,.78)),
+        linear-gradient(90deg, rgba(233,22,43,.2), rgba(255,210,58,.18), rgba(18,159,226,.22));
+      box-shadow: 0 24px 52px rgba(145, 64, 78, .18), inset 0 0 0 1px rgba(255,255,255,.54);
+      backdrop-filter: blur(12px);
+    }
+
+    .kit-body::before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      top: 18px;
+      height: 7px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--red), var(--orange), var(--gold), var(--blue));
+      opacity: .82;
+      animation: brandPulse 2.4s ease-in-out 1.6s infinite;
+    }
+
+    .kit-label {
+      position: absolute;
+      left: 50%;
+      bottom: 34px;
+      z-index: 2;
+      width: auto;
+      min-width: 126px;
+      height: 38px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 16px;
+      border-radius: 999px;
+      color: var(--red);
+      background: rgba(255,255,255,.82);
+      box-shadow: inset 0 0 0 1px rgba(233,22,43,.12), 0 12px 30px rgba(233,22,43,.12);
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: 950;
+      text-align: center;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .kit-beam {
+      position: absolute;
+      left: 50%;
+      bottom: 136px;
+      z-index: 3;
+      width: 250px;
+      height: 132px;
+      border-radius: 50% 50% 24px 24px;
+      background: radial-gradient(ellipse at 50% 92%, rgba(255,255,255,.9), rgba(255,205,214,.34) 42%, transparent 70%);
+      opacity: 0;
+      transform: translateX(-50%) scale(.72);
+      animation: beamRise 2.7s ease .75s both;
+    }
+
+    .kit-items,
+    .kit-ip-pair {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .kit-item {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.64);
+      border-radius: 14px;
+      background: rgba(255,255,255,.8);
+      box-shadow: 0 16px 32px rgba(96, 34, 47, .16), inset 0 1px 0 rgba(255,255,255,.5);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(34px) scale(.82);
+      animation: itemFloat 1.2s cubic-bezier(.2,.8,.2,1) var(--delay) both, gentleFloat 3.4s ease-in-out calc(var(--delay) + 1.1s) infinite;
+    }
+
+    .kit-item.product {
+      width: 66px;
+      height: 78px;
+      padding: 7px 6px;
+    }
+
+    .kit-item.product img {
+      max-width: 100%;
+      max-height: 62px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,.1));
+    }
+
+    .kit-item span {
+      display: none;
+    }
+
+    .kit-item.chiwei {
+      left: 74px;
+      top: 48px;
+      --delay: .95s;
+    }
+
+    .kit-item.danmei {
+      right: 74px;
+      top: 48px;
+      --delay: 1.18s;
+    }
+
+    .kit-note {
+      display: none;
+    }
+
+    .kit-note span {
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 9px;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 999px;
+      color: var(--ink);
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 10px 22px rgba(96, 34, 47, .08);
+      backdrop-filter: blur(8px);
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .kit-note span::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-right: 5px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 4px rgba(233, 22, 43, .08);
+    }
+
+    .kit-note span:last-child::before {
+      background: var(--blue);
+      box-shadow: 0 0 0 4px rgba(18, 159, 226, .08);
+    }
+
+    .theme-letters {
+      position: absolute;
+      left: 50%;
+      top: 146px;
+      z-index: 16;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      height: 42px;
+      padding: 5px 8px;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 999px;
+      background: linear-gradient(100deg, rgba(233,22,43,.94), rgba(255,138,88,.9) 48%, rgba(18,159,226,.86));
+      box-shadow: 0 16px 34px rgba(96, 34, 47, .16), inset 0 1px 0 rgba(255,255,255,.28);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateX(-50%) translateY(12px) scale(.94);
+      animation: themePillIn .85s cubic-bezier(.2,.8,.2,1) 1.82s both;
+      pointer-events: none;
+    }
+
+    .theme-letters span {
+      position: static;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(255,255,255,.12);
+      box-shadow: none;
+      font-size: 17px;
+      font-weight: 950;
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .theme-letters span:nth-child(1),
+    .theme-letters span:nth-child(2),
+    .theme-letters span:nth-child(3),
+    .theme-letters span:nth-child(4) {
+      background: rgba(255,255,255,.12);
+    }
+
+    .kit-ip-pair {
+      z-index: 9;
+    }
+
+    .kit-ip-pair img {
+      position: absolute;
+      bottom: -6px;
+      width: 96px;
+      height: 126px;
+      object-fit: contain;
+      object-position: bottom;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.12));
+      opacity: 0;
+      animation: itemFloat 1s cubic-bezier(.2,.8,.2,1) 1.78s both;
+    }
+
+    .kit-ip-pair img:first-child {
+      left: 18px;
+    }
+
+    .kit-ip-pair img:last-child {
+      right: 18px;
+    }
+
+    .supply-brief {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .brief-card {
+      position: relative;
+      min-height: 58px;
+      overflow: hidden;
+      padding: 9px 8px;
+      border: 1px solid rgba(255,255,255,.68);
+      border-radius: 12px;
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 12px 26px rgba(145, 64, 78, .08), inset 0 1px 0 rgba(255,255,255,.6);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(12px);
+      animation: bubbleIn .55s ease var(--brief-delay) both;
+    }
+
+    .brief-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--red), var(--orange));
+    }
+
+    .brief-card:nth-child(2)::before {
+      background: linear-gradient(180deg, var(--orange), var(--gold));
+    }
+
+    .brief-card:nth-child(3)::before {
+      background: linear-gradient(180deg, var(--gold), var(--blue));
+    }
+
+    .brief-card b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--red);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .brief-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.35;
+      font-weight: 850;
+    }
+
+    .dialogue-scene {
+      position: relative;
+      min-height: 470px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 12px;
+      border: 1px solid rgba(255,255,255,.62);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 24% 18%, rgba(233,22,43,.13), transparent 30%),
+        radial-gradient(circle at 78% 24%, rgba(18,159,226,.13), transparent 30%),
+        linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,239,243,.7) 52%, rgba(235,248,255,.72));
+      box-shadow: 0 22px 48px rgba(145, 64, 78, .12), inset 0 1px 0 rgba(255,255,255,.58);
+      backdrop-filter: blur(12px);
+    }
+
+    .dialogue-scene::before {
+      content: "";
+      position: absolute;
+      left: 52px;
+      right: 52px;
+      top: 50%;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--red), var(--orange), var(--gold), var(--blue));
+      opacity: .2;
+      pointer-events: none;
+    }
+
+    .chat-row {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      max-width: 92%;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: bubbleIn .52s ease var(--bubble-delay) both;
+    }
+
+    .chat-row.danmei {
+      align-self: flex-end;
+      grid-template-columns: minmax(0, 1fr) 42px;
+    }
+
+    .chat-avatar {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.68);
+      border-radius: 15px;
+      background: rgba(255,255,255,.84);
+      box-shadow: 0 12px 24px rgba(96,34,47,.12), inset 0 1px 0 rgba(255,255,255,.62);
+    }
+
+    .chat-avatar img {
+      width: 37px;
+      height: 39px;
+      object-fit: contain;
+      object-position: bottom;
+      filter: drop-shadow(0 5px 8px rgba(96,34,47,.12));
+    }
+
+    .voice-bubble {
+      position: relative;
+      min-height: 43px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 8px;
+      row-gap: 2px;
+      align-items: center;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 16px 16px 16px 5px;
+      color: var(--ink);
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 14px 28px rgba(96,34,47,.1), inset 0 1px 0 rgba(255,255,255,.65);
+    }
+
+    .chat-row.danmei .voice-bubble {
+      grid-column: 1;
+      grid-row: 1;
+      border-radius: 16px 16px 5px 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(240,250,255,.9));
+    }
+
+    .chat-row.danmei .chat-avatar {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .voice-name {
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .chat-row.danmei .voice-name {
+      color: var(--blue);
+    }
+
+    .voice-wave {
+      height: 12px;
+      border-radius: 999px;
+      background:
+        repeating-linear-gradient(90deg, rgba(233,22,43,.62) 0 5px, transparent 5px 9px),
+        linear-gradient(90deg, rgba(233,22,43,.14), rgba(255,138,88,.18), rgba(18,159,226,.16));
+      mask-image: linear-gradient(90deg, #000, transparent 86%);
+    }
+
+    .chat-row.danmei .voice-wave {
+      background:
+        repeating-linear-gradient(90deg, rgba(18,159,226,.66) 0 5px, transparent 5px 9px),
+        linear-gradient(90deg, rgba(18,159,226,.13), rgba(255,138,88,.15), rgba(233,22,43,.14));
+    }
+
+    .voice-text {
+      grid-column: 1 / -1;
+      color: #4d454a;
+      font-size: 11px;
+      line-height: 1.42;
+      font-weight: 850;
+    }
+
+    .chat-summary {
+      position: relative;
+      z-index: 1;
+      margin-top: 2px;
+      padding: 9px 12px;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(233,22,43,.92), rgba(255,138,88,.88) 54%, rgba(18,159,226,.82));
+      box-shadow: 0 18px 34px rgba(233,22,43,.16);
+      font-size: 12px;
+      line-height: 1.38;
+      font-weight: 950;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: bubbleIn .62s ease 1.76s both;
+    }
+
+    .chat-status {
+      position: relative;
+      z-index: 1;
+      align-self: center;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.62);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.68);
+      box-shadow: 0 10px 20px rgba(96,34,47,.08);
+      font-size: 10px;
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: bubbleIn .5s ease 1.94s both;
+    }
+
+    .dialogue-screen .stage {
+      justify-content: start;
+      gap: 10px;
+    }
+
+    .dialogue-screen .title.small {
+      font-size: clamp(25px, 7vw, 31px);
+    }
+
+    .dialogue-screen .lead {
+      max-width: none;
+      font-size: 13px;
+      line-height: 1.58;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.68);
+      box-shadow: 0 8px 18px rgba(145, 64, 78, .06);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .choice {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 74px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--ink);
+      text-align: left;
+      box-shadow: 0 12px 28px rgba(145, 64, 78, .09), inset 0 1px 0 rgba(255,255,255,.62);
+      backdrop-filter: blur(10px);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .choice::after {
+      content: "";
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(233, 22, 43, .16);
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .choice.selected {
+      transform: translateY(-2px);
+      border-color: rgba(233, 22, 43, .58);
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 16px 34px rgba(233, 22, 43, .13), inset 0 0 0 1px rgba(233,22,43,.12);
+    }
+
+    .choice:focus-visible {
+      outline: 2px solid rgba(233, 22, 43, .32);
+      outline-offset: 3px;
+    }
+
+    .choice.selected::after {
+      transform: scale(1.65);
+      background: var(--red);
+      box-shadow: 0 0 0 8px rgba(233, 22, 43, .12);
+    }
+
+    .choice:active {
+      transform: scale(.985);
+    }
+
+    .choice.selected em {
+      color: #fff;
+      background: linear-gradient(145deg, var(--red), var(--orange));
+    }
+
+    .choice em {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(145deg, #fff3f5, #fff);
+      color: var(--red);
+      font-style: normal;
+      font-size: 21px;
+      font-weight: 950;
+    }
+
+    .choice strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .choice span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .scene-card {
+      position: relative;
+      min-height: 168px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(233, 22, 43, .18), transparent 30%),
+        linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,240,245,.76));
+      box-shadow: 0 18px 34px rgba(96, 34, 47, .08);
+    }
+
+    .route {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .bubble {
+      position: absolute;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 900;
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    }
+
+    .bubble.one { left: 24px; top: 28px; }
+    .bubble.two { right: 24px; top: 82px; }
+    .bubble.three { left: 95px; bottom: 20px; }
+
+    .signal-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 8px;
+      color: #fff;
+      background:
+        linear-gradient(145deg, rgba(233, 22, 43, .96), rgba(35, 22, 28, .96) 64%, rgba(21, 165, 230, .86));
+      box-shadow: 0 16px 34px rgba(148, 16, 38, .24);
+    }
+
+    .signal-card::before {
+      content: "";
+      position: absolute;
+      inset: -45%;
+      opacity: .36;
+      background: conic-gradient(from 90deg, transparent, rgba(255,255,255,.38), transparent, rgba(21,165,230,.5), transparent);
+      animation: spin 12s linear infinite;
+    }
+
+    .signal-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .signal-card.preheat {
+      grid-template-columns: 1fr;
+      min-height: 500px;
+      grid-template-rows: 1fr auto;
+      place-items: stretch center;
+      padding: 34px 18px 22px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(255,255,255,.26), transparent 28%),
+        linear-gradient(145deg, #e9162b, #23161c 60%, #15a5e6);
+    }
+
+    .signal-card.preheat::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 38%;
+      width: 250px;
+      height: 250px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow:
+        0 0 0 34px rgba(255,255,255,.04),
+        0 0 0 68px rgba(255,255,255,.03),
+        0 0 70px rgba(255,255,255,.16);
+    }
+
+    .signal-card.preheat .signal-button {
+      position: absolute;
+      left: 50%;
+      top: 38%;
+      width: 178px;
+      height: 178px;
+      margin: 0;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.34), 0 0 56px rgba(255, 255, 255, .28), 0 0 80px rgba(233, 22, 43, .44), inset 0 0 38px rgba(255,255,255,.2);
+      transition: transform .16s ease, filter .16s ease;
+    }
+
+    .signal-card.preheat .signal-button.pop {
+      animation: tapPop .34s ease;
+      filter: brightness(1.2) saturate(1.18);
+    }
+
+    .signal-card.preheat .signal-button strong {
+      font-size: 38px;
+    }
+
+    .signal-card.preheat .signal-button span {
+      font-size: 13px;
+    }
+
+    .signal-card.preheat .signal-text {
+      align-self: end;
+      max-width: 300px;
+      justify-items: center;
+    }
+
+    .signal-card.preheat .signal-text strong {
+      font-size: 21px;
+    }
+
+    .signal-card.preheat .signal-text p {
+      color: rgba(255,255,255,.82);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .signal-card.preheat .spark-dots i {
+      width: 13px;
+      height: 13px;
+    }
+
+    .signal-card.preheat.synced {
+      box-shadow: 0 24px 60px rgba(233, 22, 43, .34), inset 0 0 0 1px rgba(255,255,255,.24);
+    }
+
+    .signal-orbit {
+      position: absolute;
+      left: 50%;
+      top: 38%;
+      width: 330px;
+      height: 330px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .signal-orbit::before,
+    .signal-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.2);
+      border-top-color: rgba(255,255,255,.65);
+      border-right-color: rgba(21,165,230,.56);
+      animation: spin 9s linear infinite;
+    }
+
+    .signal-orbit::after {
+      inset: 42px;
+      animation-duration: 6s;
+      animation-direction: reverse;
+      opacity: .7;
+    }
+
+    .orbit-node {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 18px rgba(255,255,255,.85);
+    }
+
+    .orbit-node:nth-child(1) { left: 50%; top: 0; }
+    .orbit-node:nth-child(2) { right: 23px; top: 88px; background: #ffb6c4; }
+    .orbit-node:nth-child(3) { left: 46px; bottom: 56px; background: #15a5e6; }
+
+    .signal-progress {
+      width: min(300px, 82vw);
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+    }
+
+    .signal-progress span {
+      display: block;
+      width: var(--signal-progress, 0%);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #fff, #ffb6c4, #15a5e6);
+      box-shadow: 0 0 18px rgba(255,255,255,.56);
+      transition: width .22s ease;
+    }
+
+    .burst {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      pointer-events: none;
+      border: 2px solid rgba(255,255,255,.85);
+      transform: translate(-50%, -50%) scale(.35);
+      animation: burstOut .62s ease forwards;
+      z-index: 3;
+    }
+
+    .energy-particle {
+      position: absolute;
+      left: 50%;
+      top: 38%;
+      z-index: 4;
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: #1d171a;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 0 22px rgba(255,255,255,.42);
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: particleFly .86s ease forwards;
+    }
+
+    .energy-ray {
+      position: absolute;
+      left: 50%;
+      top: 38%;
+      z-index: 2;
+      width: 2px;
+      height: 190px;
+      transform-origin: center bottom;
+      background: linear-gradient(to top, rgba(255,255,255,.9), rgba(255,255,255,0));
+      opacity: 0;
+      animation: rayFlash .52s ease forwards;
+      pointer-events: none;
+    }
+
+    .signal-button {
+      position: relative;
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: radial-gradient(circle, #fff 0 8%, #ffb6c4 9% 17%, var(--red) 35%, rgba(255,255,255,.12) 100%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.28), 0 0 30px rgba(255,255,255,.2);
+    }
+
+    .signal-button::before,
+    .signal-button::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 50%;
+      animation: heartbeat 1.55s ease-in-out infinite;
+    }
+
+    .signal-button::after {
+      inset: -13px;
+      animation-delay: .28s;
+    }
+
+    .signal-button strong {
+      position: relative;
+      z-index: 1;
+      display: block;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .signal-button span {
+      position: relative;
+      z-index: 1;
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .signal-text {
+      display: grid;
+      gap: 6px;
+    }
+
+    .signal-text strong {
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .signal-text p {
+      color: rgba(255,255,255,.78);
+      font-size: 11px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .spark-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .spark-dots i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.54);
+      background: rgba(255,255,255,.08);
+    }
+
+    .spark-dots i.on {
+      background: #fff;
+      box-shadow: 0 0 12px rgba(255,255,255,.6);
+    }
+
+    .supply-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .supply {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 126px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      box-shadow: 0 14px 32px rgba(145, 64, 78, .1), inset 0 1px 0 rgba(255,255,255,.64);
+      text-align: left;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+      cursor: pointer;
+    }
+
+    .supply.selected,
+    .supply:active {
+      transform: translateY(-2px);
+      border-color: rgba(233, 22, 43, .42);
+      background: #fff;
+    }
+
+    .supply img {
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
+    }
+
+    .supply-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .supply-brand img {
+      width: auto;
+      max-width: 82px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .supply-brand span {
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .supply strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 950;
+    }
+
+    .supply p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .supply-action {
+      grid-column: 1 / -1;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(30, 21, 24, .12);
+    }
+
+    .supply.selected .supply-action {
+      display: flex;
+    }
+
+    .supply-action span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 750;
+    }
+
+    .supply-qr {
+      width: 74px;
+      height: 74px;
+      flex: 0 0 74px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      object-fit: contain;
+    }
+
+    .supply-action-main {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .supply-link {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--ink);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .warning {
+      max-width: 330px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.58;
+      font-weight: 650;
+    }
+
+    .report-card {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,242,245,.86));
+      box-shadow: 0 18px 38px rgba(145, 64, 78, .11), inset 0 1px 0 rgba(255,255,255,.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .type-tag {
+      width: fit-content;
+      margin-bottom: 12px;
+      padding: 11px 14px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .garden {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(233, 22, 43, .12);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 50% 52%, rgba(255,255,255,.92), transparent 24%),
+        radial-gradient(circle at 50% 65%, rgba(233, 22, 43, .13), transparent 42%),
+        linear-gradient(145deg, rgba(255,248,247,.9), rgba(239,250,255,.86));
+      aspect-ratio: 17 / 10;
+    }
+
+    .garden img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .report-badge {
+      min-height: 58px;
+      display: grid;
+      align-content: center;
+      gap: 2px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.72);
+    }
+
+    .report-badge strong {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .report-badge span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .poster {
+      position: relative;
+      min-height: 540px;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+      padding: 22px;
+      border-radius: 8px;
+      color: #fff;
+      background: #211323;
+      box-shadow: 0 18px 38px rgba(145, 64, 78, .16);
+    }
+
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(24,14,35,.38) 0%, rgba(24,14,35,.08) 36%, rgba(24,14,35,.78) 100%),
+        linear-gradient(90deg, rgba(233,22,43,.28), transparent 38%, rgba(18,159,226,.22)),
+        var(--poster-image, url("assets/poster-master.jpg")) center 54% / cover no-repeat;
+    }
+
+    .poster::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .16;
+      background-image:
+        linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+    }
+
+    .poster > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .poster-head {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      max-width: 278px;
+    }
+
+    .poster h2 {
+      margin: 0;
+      font-size: 31px;
+      line-height: 1.14;
+      font-weight: 950;
+      text-shadow: 0 8px 24px rgba(0,0,0,.22);
+    }
+
+    .poster-body {
+      min-height: 0;
+      display: flex;
+      align-items: end;
+    }
+
+    .poster-type {
+      width: fit-content;
+      padding: 8px 10px;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 10px 26px rgba(0,0,0,.16);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .poster-copy {
+      align-self: end;
+      max-width: 270px;
+      margin-top: auto;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 8px;
+      background: rgba(17, 12, 20, .28);
+      box-shadow: 0 12px 28px rgba(0,0,0,.12);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.84);
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 750;
+    }
+
+    .poster-bottom {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .qrbox {
+      width: 92px;
+      height: 92px;
+      display: grid;
+      place-items: center;
+      padding: 5px;
+      background: #fff;
+    }
+
+    .qrbox img {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+    }
+
+    .tiny {
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      line-height: 1.55;
+      font-weight: 750;
+    }
+
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: calc(92px + var(--safe-bottom));
+      z-index: 50;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #fff;
+      background: rgba(25, 23, 23, .86);
+      font-size: 13px;
+      font-weight: 900;
+      opacity: 0;
+      transform: translate(-50%, 12px);
+      transition: opacity .18s ease, transform .18s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .poster-preview {
+      position: absolute;
+      inset: 0;
+      z-index: 80;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      background: rgba(33, 25, 27, .62);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+
+    .poster-preview.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .poster-preview-card {
+      width: min(100%, 330px);
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.56);
+      border-radius: 14px;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 28px 70px rgba(0,0,0,.24);
+    }
+
+    .poster-preview-card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #21191b;
+    }
+
+    .poster-preview-tip {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .poster-preview-close {
+      min-height: 42px;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), #ff4c54);
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .poster-preview-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .poster-preview-download,
+    .poster-preview-open {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--ink);
+      background: rgba(255,255,255,.76);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 950;
+      text-decoration: none;
+    }
+
+    .sound-toggle {
+      position: absolute;
+      right: 18px;
+      bottom: calc(92px + var(--safe-bottom));
+      z-index: 48;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.44);
+      border-radius: 50%;
+      color: #fff;
+      background: linear-gradient(145deg, rgba(233, 22, 43, .86), rgba(18, 159, 226, .78));
+      box-shadow: 0 14px 30px rgba(96, 34, 47, .18), inset 0 1px 0 rgba(255,255,255,.24);
+      backdrop-filter: blur(12px);
+      font-size: 15px;
+      font-weight: 950;
+      transition: transform .16s ease, background .16s ease, color .16s ease, border-color .16s ease;
+    }
+
+    .sound-toggle.muted {
+      color: var(--ink);
+      border-color: rgba(143, 70, 86, .18);
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 12px 26px rgba(145, 64, 78, .1);
+    }
+
+    .sound-toggle:active {
+      transform: scale(.94);
+    }
+
+    @media (max-height: 730px) {
+      .screen {
+        padding-top: calc(112px + var(--safe-top));
+        padding-bottom: calc(32px + var(--safe-bottom));
+      }
+
+      .stage {
+        justify-content: start;
+      }
+
+      .actions {
+        margin-top: 18px;
+        padding-top: 0;
+      }
+
+      .sound-toggle {
+        right: 14px;
+        bottom: calc(84px + var(--safe-bottom));
+        width: 38px;
+        height: 38px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 390px) and (max-height: 760px) {
+      .actions {
+        margin-top: 18px;
+      }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(1turn); }
+    }
+
+    @keyframes kitGlow {
+      0%, 100% { opacity: .74; transform: translate(-50%, -50%) scale(.96); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+    }
+
+    @keyframes lidOpen {
+      0% { transform: translateY(0) rotateX(0) rotate(0); }
+      38% { transform: translateY(-8px) rotateX(0) rotate(0); }
+      100% { transform: translateY(-62px) rotateX(56deg) rotate(-8deg); }
+    }
+
+    @keyframes beamRise {
+      0% { opacity: 0; transform: translateX(-50%) scale(.64); }
+      36% { opacity: .9; }
+      100% { opacity: .58; transform: translateX(-50%) scale(1.06); }
+    }
+
+    @keyframes itemFloat {
+      0% { opacity: 0; transform: translateY(34px) scale(.82); }
+      70% { opacity: 1; transform: translateY(-8px) scale(1.04); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes roleRise {
+      0% { opacity: 0; transform: translateY(18px) scale(.92); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes bubbleIn {
+      0% { opacity: 0; transform: translateY(12px) scale(.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -7px; }
+    }
+
+    @keyframes letterPop {
+      0% { opacity: 0; transform: scale(.55); }
+      64% { opacity: 1; transform: scale(1.12); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes themePillIn {
+      0% { opacity: 0; transform: translateX(-50%) translateY(12px) scale(.94); }
+      72% { opacity: 1; transform: translateX(-50%) translateY(-2px) scale(1.03); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+    }
+
+    @keyframes brandPulse {
+      0%, 100% { opacity: .58; filter: saturate(1); }
+      50% { opacity: 1; filter: saturate(1.35); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { opacity: .3; transform: scale(.94); }
+      50% { opacity: .82; transform: scale(1.06); }
+    }
+
+    @keyframes tapPop {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      44% { transform: translate(-50%, -50%) scale(1.12); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes burstOut {
+      0% { opacity: .95; transform: translate(-50%, -50%) scale(.3); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(5.6); }
+    }
+
+    @keyframes particleFly {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(.76); }
+      18% { opacity: 1; }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1);
+      }
+    }
+
+    @keyframes rayFlash {
+      0% { opacity: 0; transform: rotate(var(--angle)) scaleY(.3); }
+      32% { opacity: .84; }
+      100% { opacity: 0; transform: rotate(var(--angle)) scaleY(1.15); }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" id="app">
+    <audio id="tapSound" src="assets/tap-sound.mp3" preload="auto"></audio>
+    <audio id="bgm" src="assets/bgm.mp3" preload="auto" loop></audio>
+    <div class="brand-atmosphere" aria-hidden="true">
+      <span class="petal" style="left: -18px; top: 118px; --r: -18deg;"></span>
+      <span class="petal alt" style="right: -28px; top: 220px; --r: 26deg;"></span>
+      <span class="heart" style="left: 28px; bottom: 132px; --r: -12deg;"></span>
+      <span class="petal" style="right: 34px; bottom: 88px; --r: 16deg;"></span>
+    </div>
+    <header class="top">
+      <img class="logo" src="assets/regenex-logo.png" alt="朗圣药业">
+      <div class="progress-wrap" aria-label="补给进度">
+        <span class="progress-label" id="progressLabel">补给进度 01/10</span>
+        <div class="progress"><span id="progress"></span></div>
+      </div>
+    </header>
+
+    <section class="screen active" data-screen="0">
+      <div class="stage">
+        <div class="hero-art">
+          <div class="supply-kit" aria-label="随心而育选择权补给箱">
+            <div class="kit-aura" aria-hidden="true"></div>
+            <div class="kit-ribbon" aria-hidden="true"></div>
+            <div class="kit-beam" aria-hidden="true"></div>
+            <div class="kit-items" aria-hidden="true">
+              <div class="kit-item product chiwei">
+                <img src="assets/chiwei-product.png" alt="">
+                <span>赤尾防护</span>
+              </div>
+              <div class="kit-item product danmei">
+                <img src="assets/danmei-product.png" alt="">
+                <span>丹媚补给</span>
+              </div>
+            </div>
+            <div class="kit-note" aria-hidden="true"><span>确认沟通</span><span>未来规划</span></div>
+            <div class="theme-letters" aria-hidden="true">
+              <span>随</span>
+              <span>心</span>
+              <span>而</span>
+              <span>育</span>
+            </div>
+            <div class="kit-box" aria-hidden="true">
+              <div class="kit-lid"></div>
+              <div class="kit-body"><div class="kit-label">选择权补给箱</div></div>
+            </div>
+            <div class="kit-ip-pair" aria-hidden="true">
+              <img src="assets/danmei-ip.png" alt="">
+              <img src="assets/chiwei-ip.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="supply-brief" aria-label="选择权补给清单">
+          <div class="brief-card" style="--brief-delay:2.05s">
+            <b>亲密前</b>
+            <span>先确认，再靠近</span>
+          </div>
+          <div class="brief-card" style="--brief-delay:2.18s">
+            <b>意外后</b>
+            <span>先了解，再选择</span>
+          </div>
+          <div class="brief-card" style="--brief-delay:2.31s">
+            <b>未来里</b>
+            <span>先计划，再绽放</span>
+          </div>
+        </div>
+        <div class="cover-copy">
+          <span class="kicker">Choice Supply</span>
+          <h1 class="title cover-title">别让意外<br>替你选择人生。</h1>
+          <p class="lead">心动可以随心发生，未来应由自己选择。进入补给站，点亮亲密前、意外后、未来规划里的科学补给。</p>
+        </div>
+        <div class="chip-row">
+          <span class="chip">朗圣药业</span>
+          <span class="chip">丹媚</span>
+          <span class="chip">赤尾</span>
+          <span class="chip">随心所“育”</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" data-next>认识补给官</button>
+      </div>
+    </section>
+
+    <section class="screen dialogue-screen" data-screen="1">
+      <div class="stage">
+        <span class="kicker">IP Dialogue</span>
+        <h2 class="title small">亲密路上，补给官上线。</h2>
+        <p class="lead">赤尾和丹媚不是替你决定，而是在关键节点提醒你：爱可以随心，选择权要在手里。</p>
+        <div class="dialogue-scene" aria-label="赤尾与丹媚场景对话">
+          <div class="chat-row chiwei" style="--bubble-delay:.16s">
+            <div class="chat-avatar"><img src="assets/chiwei-ip.png" alt="赤尾 IP"></div>
+            <div class="voice-bubble">
+              <span class="voice-name">赤尾 06''</span>
+              <span class="voice-wave" aria-hidden="true"></span>
+              <span class="voice-text">心动靠近前，先把安心准备好。</span>
+            </div>
+          </div>
+          <div class="chat-row danmei" style="--bubble-delay:.42s">
+            <div class="chat-avatar"><img src="assets/danmei-ip.png" alt="丹媚 IP"></div>
+            <div class="voice-bubble">
+              <span class="voice-name">丹媚 07''</span>
+              <span class="voice-wave" aria-hidden="true"></span>
+              <span class="voice-text">如果计划被打乱，先别让慌乱替你决定。</span>
+            </div>
+          </div>
+          <div class="chat-row chiwei" style="--bubble-delay:.72s">
+            <div class="chat-avatar"><img src="assets/chiwei-ip.png" alt="赤尾 IP"></div>
+            <div class="voice-bubble">
+              <span class="voice-name">赤尾 05''</span>
+              <span class="voice-wave" aria-hidden="true"></span>
+              <span class="voice-text">随心不是随意，是先把边界和确认说清楚。</span>
+            </div>
+          </div>
+          <div class="chat-row danmei" style="--bubble-delay:1s">
+            <div class="chat-avatar"><img src="assets/danmei-ip.png" alt="丹媚 IP"></div>
+            <div class="voice-bubble">
+              <span class="voice-name">丹媚 06''</span>
+              <span class="voice-wave" aria-hidden="true"></span>
+              <span class="voice-text">随心而育，也是不被意外推着走。</span>
+            </div>
+          </div>
+          <div class="chat-row chiwei" style="--bubble-delay:1.2s">
+            <div class="chat-avatar"><img src="assets/chiwei-ip.png" alt="赤尾 IP"></div>
+            <div class="voice-bubble">
+              <span class="voice-name">赤尾 05''</span>
+              <span class="voice-wave" aria-hidden="true"></span>
+              <span class="voice-text">亲密前，我负责提醒你主动防护。</span>
+            </div>
+          </div>
+          <div class="chat-row danmei" style="--bubble-delay:1.38s">
+            <div class="chat-avatar"><img src="assets/danmei-ip.png" alt="丹媚 IP"></div>
+            <div class="voice-bubble">
+              <span class="voice-name">丹媚 06''</span>
+              <span class="voice-wave" aria-hidden="true"></span>
+              <span class="voice-text">意外后，我提醒你查清信息、科学选择。</span>
+            </div>
+          </div>
+          <div class="chat-row chiwei" style="--bubble-delay:1.56s">
+            <div class="chat-avatar"><img src="assets/chiwei-ip.png" alt="赤尾 IP"></div>
+            <div class="voice-bubble">
+              <span class="voice-name">赤尾 04''</span>
+              <span class="voice-wave" aria-hidden="true"></span>
+              <span class="voice-text">准备不是扫兴，是让喜欢更安心。</span>
+            </div>
+          </div>
+          <div class="chat-summary">随心而育，是把亲密、安心和未来都交回自己手里。</div>
+          <div class="chat-status">补给官正在为你同步心动信号</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" id="dialoguePrev" data-prev>返回首页</button>
+        <button class="btn" id="dialogueNext" data-next>开始同步心动信号</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="2">
+      <div class="stage">
+        <span class="kicker">Step 01</span>
+        <h2 class="title small">答题前，先同步一次心动信号。</h2>
+        <p class="lead">点亮 5 次，让氛围、确认和准备一起在线。</p>
+        <div class="signal-card preheat" id="signalCard">
+          <div class="signal-orbit" aria-hidden="true"><i class="orbit-node"></i><i class="orbit-node"></i><i class="orbit-node"></i></div>
+          <button class="signal-button" id="signalButton" type="button">
+            <div>
+              <strong id="sparkCount">0/5</strong>
+              <span>同步信号</span>
+            </div>
+          </button>
+          <div class="signal-text">
+            <strong>点击同步心动信号</strong>
+            <p id="signalHint">每一次点击，都在把“心动”校准成更温柔、更清楚的选择。</p>
+            <div class="spark-dots" id="sparkDots"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="signal-progress" id="signalProgress"><span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" data-prev>返回上一页</button>
+        <button class="btn" id="signalNext" data-next disabled>进入选择题</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="3">
+      <div class="stage">
+        <span class="kicker">Step 02</span>
+        <h2 class="title small">你想先守护哪段人生节奏？</h2>
+        <p class="lead">随心不是随意，而是把未来选择权留在自己手里。</p>
+        <div class="choice-grid" data-choice-group="goal">
+          <button class="choice" data-value="study" data-plan="24"><em>学</em><span><strong>学业成长</strong><span>把知识、证书和梦想先养成花。</span></span></button>
+          <button class="choice" data-value="career" data-plan="24"><em>事</em><span><strong>事业开花</strong><span>让上升期稳稳向前，不被意外改写。</span></span></button>
+          <button class="choice" data-value="love" data-comm="16"><em>爱</em><span><strong>亲密关系</strong><span>心动要有回应，也要有确认和准备。</span></span></button>
+          <button class="choice" data-value="family" data-plan="16"><em>家</em><span><strong>未来留白</strong><span>不急着定论，把选择留给准备好的自己。</span></span></button>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" data-prev>返回上一页</button>
+        <button class="btn" data-next>生成我的育见路线</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="4">
+      <div class="stage">
+        <span class="kicker">Step 03</span>
+        <h2 class="title small">靠近之前，怎样让爱更安心？</h2>
+        <p class="lead">随心不是随意。亲密前多一步确认，爱才有更温柔的空间。</p>
+        <div class="choice-grid" data-choice-group="intimacy">
+          <button class="choice" data-value="consent" data-comm="24" data-protect="12"><em>A</em><span><strong>先确认彼此愿意</strong><span>把舒服、边界和期待说在前面。</span></span></button>
+          <button class="choice" data-value="protect" data-protect="28" data-comm="10"><em>B</em><span><strong>把防护准备好</strong><span>主动准备，是给彼此和未来的温柔底气。</span></span></button>
+          <button class="choice" data-value="natural" data-comm="8"><em>C</em><span><strong>让氛围自然升温</strong><span>心动可以继续，但准备也要同步在线。</span></span></button>
+          <button class="choice" data-value="shy" data-comm="14" data-protect="8"><em>D</em><span><strong>先把害羞说开</strong><span>把不好意思变成一次认真沟通。</span></span></button>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" data-prev>返回上一页</button>
+        <button class="btn" data-next>点亮亲密前补给</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="5">
+      <div class="stage">
+        <span class="kicker">Step 04</span>
+        <h2 class="title small">意外之后，怎样拿回主动权？</h2>
+        <div class="warning">别让慌乱替你决定。先确认信息，再沟通，需要时交给专业建议。</div>
+        <div class="choice-grid" data-choice-group="unexpected">
+          <button class="choice" data-value="avoid" data-compose="6"><em>A</em><span><strong>先冷静一下</strong><span>情绪可以缓冲，信息仍需要确认。</span></span></button>
+          <button class="choice" data-value="search" data-compose="22" data-protect="14"><em>B</em><span><strong>查清科学信息</strong><span>把不确定变成可判断的答案。</span></span></button>
+          <button class="choice" data-value="talk" data-compose="16" data-comm="18"><em>C</em><span><strong>一起认真沟通</strong><span>不把压力独自扛，也不把责任推开。</span></span></button>
+          <button class="choice" data-value="professional" data-compose="28" data-protect="18"><em>D</em><span><strong>咨询专业人士</strong><span>用专业建议，帮自己更从容地下一步。</span></span></button>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" data-prev>返回上一页</button>
+        <button class="btn" data-next>点亮意外后补给</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="6">
+      <div class="stage">
+        <span class="kicker">Step 05</span>
+        <h2 class="title small">关于未来，你想怎样安排？</h2>
+        <p class="lead">随心所育，是把是否生育、何时生育，都交还给准备好的自己。</p>
+        <div class="choice-grid" data-choice-group="future">
+          <button class="choice" data-value="self" data-plan="22"><em>1</em><span><strong>先把自己养成花</strong><span>把当下的目标、热爱和节奏走稳。</span></span></button>
+          <button class="choice" data-value="ready" data-plan="18" data-comm="12"><em>2</em><span><strong>等彼此都准备好</strong><span>关系成熟时，再一起走向下一站。</span></span></button>
+          <button class="choice" data-value="family" data-plan="16" data-compose="10"><em>3</em><span><strong>把家庭放进计划</strong><span>让未来不是冲动，而是共同的答案。</span></span></button>
+          <button class="choice" data-value="reserve" data-compose="16" data-plan="12"><em>4</em><span><strong>暂时保留可能</strong><span>还没定论也没关系，选择权依然在手里。</span></span></button>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" data-prev>返回上一页</button>
+        <button class="btn" data-next>查看随心补给</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="7">
+      <div class="stage">
+        <span class="kicker">Supply Unlocked</span>
+        <h2 class="title small">你的选择权补给已点亮。</h2>
+        <div class="supply-grid">
+          <article class="supply selected" tabindex="0" role="button" data-supply="赤尾补给已点亮" data-url="https://s.taobao.com/search?q=%E8%B5%A4%E5%B0%BE%20%E9%81%BF%E5%AD%95%E5%A5%97">
+            <img src="assets/chiwei-product.png" alt="赤尾产品图">
+            <div>
+              <div class="supply-brand"><img src="assets/chiwei-logo.png" alt="赤尾"><span>亲密前补给</span></div>
+              <strong>亲密前，有赤尾</strong>
+              <p>主动防护是对彼此和未来的尊重。红科技硬实力，让亲密更安心。</p>
+            </div>
+            <div class="supply-action">
+              <img class="supply-qr" src="assets/qr-chiwei-taobao.png" alt="赤尾淘宝搜索二维码">
+              <div class="supply-action-main">
+                <span>扫码或点击跳转淘宝搜索，查看赤尾相关产品。</span>
+                <button class="supply-link" type="button">去淘宝了解/购买</button>
+              </div>
+            </div>
+          </article>
+          <article class="supply" tabindex="0" role="button" data-supply="丹媚补给已点亮" data-url="https://s.taobao.com/search?q=%E4%B8%B9%E5%AA%9A%20%E5%B7%A6%E7%82%94%E8%AF%BA%E5%AD%95%E9%85%AE%E8%82%A0%E6%BA%B6%E7%89%87">
+            <img src="assets/danmei-product.png" alt="丹媚产品图">
+            <div>
+              <div class="supply-brand"><img src="assets/danmei-logo.png" alt="丹媚"><span>突发时补给</span></div>
+              <strong>意外后，懂丹媚</strong>
+              <p>突发时先了解科学信息。丹媚肠溶片剂型，帮助女性从容选择。</p>
+            </div>
+            <div class="supply-action">
+              <img class="supply-qr" src="assets/qr-danmei-taobao.png" alt="丹媚淘宝搜索二维码">
+              <div class="supply-action-main">
+                <span>扫码或点击跳转淘宝搜索。用药前请阅读说明书或咨询专业人士。</span>
+                <button class="supply-link" type="button">去淘宝了解/购买</button>
+              </div>
+            </div>
+          </article>
+          <article class="supply" tabindex="0" role="button" data-supply="朗圣理念已点亮" data-url="http://www.regenex.com.cn/">
+            <img src="assets/regenex-logo.png" alt="朗圣药业 Logo">
+            <div>
+              <div class="supply-brand"><img src="assets/regenex-logo.png" alt="朗圣药业"><span>品牌理念补给</span></div>
+              <strong>选择权，回到自己手里</strong>
+              <p>朗圣药业以“让人类生殖更健康”为使命，守护年轻人的人生规划。</p>
+            </div>
+            <div class="supply-action">
+              <img class="supply-qr" src="assets/qr-regenex-official.png" alt="朗圣药业官网二维码">
+              <div class="supply-action-main">
+                <span>扫码或点击跳转朗圣药业官网。</span>
+                <button class="supply-link" type="button">查看官网</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" data-next>生成选择权报告</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="8">
+      <div class="stage">
+        <span class="kicker">Your Report</span>
+        <h2 class="title small">你的选择权花园已绽放。</h2>
+        <div class="report-card">
+          <div>
+            <div class="type-tag" id="resultType">人生主理型</div>
+            <p class="lead" id="resultCopy">爱可以发生，人生节奏也可以由你掌握。</p>
+          </div>
+          <div class="garden" aria-label="选择权花园">
+            <img id="reportImage" src="assets/report-master.jpg" alt="人生主理型花园插画">
+          </div>
+          <div class="badge-grid">
+            <div class="report-badge"><strong>心动补给</strong><span>把氛围校准成确认</span></div>
+            <div class="report-badge"><strong>赤尾补给</strong><span>亲密前主动防护</span></div>
+            <div class="report-badge"><strong>丹媚补给</strong><span>意外后科学选择</span></div>
+            <div class="report-badge"><strong>朗圣补给</strong><span>选择权回到自己手里</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" data-next>生成分享海报</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="9">
+      <div class="stage">
+        <div class="poster" id="poster">
+          <div class="poster-head">
+            <div class="poster-type" id="posterType">人生主理型</div>
+            <h2>我的选择权<br>花园已绽放</h2>
+          </div>
+          <div class="poster-body">
+            <p class="poster-copy" id="posterCopy">我不想被意外打乱计划，这就是我的择育权。</p>
+          </div>
+          <div class="poster-bottom">
+            <p class="tiny">亲密前，有赤尾<br>意外后，懂丹媚<br>朗圣药业｜随心所“育”</p>
+            <div class="qrbox"><img id="qrImage" src="assets/qr-regenex-official.png" alt="朗圣药业官网二维码"></div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="savePoster">保存海报</button>
+        <button class="btn secondary" id="restart">再测一次</button>
+      </div>
+    </section>
+
+    <div class="toast" id="toast">已保存</div>
+    <div class="poster-preview" id="posterPreview" aria-hidden="true">
+      <div class="poster-preview-card">
+        <img id="posterPreviewImage" alt="生成的分享海报">
+        <p class="poster-preview-tip">海报已生成。手机端可长按图片保存；如果长按无效，点“打开大图”后再保存。</p>
+        <div class="poster-preview-actions">
+          <a class="poster-preview-download" id="posterPreviewDownload" href="#" download="regenex-choice-poster.png">下载PNG</a>
+          <a class="poster-preview-open" id="posterPreviewOpen" href="#" target="_blank" rel="noopener">打开大图</a>
+        </div>
+        <button class="poster-preview-close" id="posterPreviewClose" type="button">关闭</button>
+      </div>
+    </div>
+    <button class="sound-toggle" id="soundToggle" type="button" aria-label="静音背景音乐" aria-pressed="false">音</button>
+  </main>
+
+  <script src="assets/poster-data.js"></script>
+  <script>
+    const app = document.getElementById("app");
+    const screens = [...document.querySelectorAll(".screen")];
+    const progress = document.getElementById("progress");
+    const progressLabel = document.getElementById("progressLabel");
+    const toast = document.getElementById("toast");
+    const signalNext = document.getElementById("signalNext");
+    const signalCard = document.getElementById("signalCard");
+    const tapSound = document.getElementById("tapSound");
+    const bgm = document.getElementById("bgm");
+    const soundToggle = document.getElementById("soundToggle");
+    const posterPreview = document.getElementById("posterPreview");
+    const posterPreviewImage = document.getElementById("posterPreviewImage");
+    const posterPreviewDownload = document.getElementById("posterPreviewDownload");
+    const posterPreviewOpen = document.getElementById("posterPreviewOpen");
+    const posterPreviewClose = document.getElementById("posterPreviewClose");
+    let bgmMuted = false;
+    let bgmStarted = false;
+    let posterPreviewUrl = "";
+    const state = {
+      screen: 0,
+      goal: "",
+      intimacy: "",
+      unexpected: "",
+      future: "",
+      plan: 46,
+      comm: 44,
+      protect: 44,
+      compose: 44,
+      spark: 0,
+      signalClicks: 0,
+      effects: {},
+      result: null
+    };
+
+    const profiles = {
+      world: {
+        type: "先闯世界型",
+        copy: "你更想守住学业与事业节奏。科学防护不是束缚，而是让未来不被意外改写。",
+        poster: "我想先把世界走宽，也把选择权握稳。",
+        image: "assets/poster-world.jpg",
+        reportImage: "assets/report-world.jpg"
+      },
+      free: {
+        type: "自由探索型",
+        copy: "你愿意体验亲密，也在学习把边界和准备说清楚。自由不是随意，是更有意识地选择。",
+        poster: "亲密可以探索，准备也要在线。",
+        image: "assets/poster-free.jpg",
+        reportImage: "assets/report-free.jpg"
+      },
+      stable: {
+        type: "稳定同行型",
+        copy: "你重视长期关系和共同规划。把亲密、沟通与防护放在一起，未来会更稳。",
+        poster: "我想和重要的人一起，把未来计划清楚。",
+        image: "assets/poster-stable.jpg",
+        reportImage: "assets/report-stable.jpg"
+      },
+      calm: {
+        type: "从容修正型",
+        copy: "面对突发，你更愿意查清楚、说清楚、科学处理。慌乱会过去，主动权要留下。",
+        poster: "突发不是终点，科学选择让我从容修正。",
+        image: "assets/poster-calm.jpg",
+        reportImage: "assets/report-calm.jpg"
+      },
+      master: {
+        type: "人生主理型",
+        copy: "你有规划意识，也有沟通和防护意识。爱可以发生，人生节奏也可以由你掌握。",
+        poster: "我不想被意外打乱计划，这就是我的择育权。",
+        image: "assets/poster-master.jpg",
+        reportImage: "assets/report-master.jpg"
+      }
+    };
+
+    function goTo(index) {
+      if (document.activeElement && typeof document.activeElement.blur === "function") {
+        document.activeElement.blur();
+      }
+      window.scrollTo(0, 0);
+      app.scrollTop = 0;
+      state.screen = Math.max(0, Math.min(index, screens.length - 1));
+      screens.forEach((screen, i) => screen.classList.toggle("active", i === state.screen));
+      progress.style.setProperty("--progress", `${((state.screen + 1) / screens.length) * 100}%`);
+      progressLabel.textContent = `补给进度 ${String(state.screen + 1).padStart(2, "0")}/${String(screens.length).padStart(2, "0")}`;
+      if (state.screen === 8) renderReport();
+      if (state.screen === 9) renderPoster();
+    }
+
+    function syncScreenFromActive() {
+      const activeIndex = screens.findIndex((screen) => screen.classList.contains("active"));
+      if (activeIndex >= 0) state.screen = activeIndex;
+    }
+
+    function saveProgress() {
+      try {
+        sessionStorage.setItem("regenex-choice-progress", JSON.stringify({
+          screen: state.screen,
+          goal: state.goal,
+          intimacy: state.intimacy,
+          unexpected: state.unexpected,
+          future: state.future,
+          plan: state.plan,
+          comm: state.comm,
+          protect: state.protect,
+          compose: state.compose,
+          spark: state.spark,
+          signalClicks: state.signalClicks,
+          effects: state.effects,
+          result: state.result
+        }));
+      } catch (error) {}
+    }
+
+    function restoreProgress() {
+      try {
+        const raw = sessionStorage.getItem("regenex-choice-progress");
+        if (!raw) return false;
+        const saved = JSON.parse(raw);
+        Object.assign(state, saved);
+        document.querySelectorAll("[data-choice-group]").forEach((group) => {
+          const key = group.dataset.choiceGroup;
+          group.querySelectorAll(".choice").forEach((item) => {
+            item.classList.toggle("selected", item.dataset.value === state[key]);
+          });
+        });
+        renderSpark();
+        goTo(state.screen || 0);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function openExternalLink(url) {
+      saveProgress();
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      showToast("已打开新页面，回来可继续");
+    }
+
+    function clampScore(value) {
+      return Math.max(58, Math.min(99, Math.round(value)));
+    }
+
+    function playTapSound() {
+      if (!tapSound) return;
+      try {
+        tapSound.currentTime = 0;
+        const play = tapSound.play();
+        if (play && typeof play.catch === "function") play.catch(() => {});
+      } catch (error) {}
+    }
+
+    function syncSoundToggle() {
+      if (!soundToggle) return;
+      soundToggle.classList.toggle("muted", bgmMuted);
+      soundToggle.textContent = bgmMuted ? "静" : "音";
+      soundToggle.setAttribute("aria-pressed", String(bgmMuted));
+      soundToggle.setAttribute("aria-label", bgmMuted ? "开启背景音乐" : "静音背景音乐");
+    }
+
+    function startBgm() {
+      if (!bgm || bgmMuted) return;
+      bgm.volume = 0.42;
+      bgm.muted = false;
+      bgmStarted = true;
+      try {
+        const play = bgm.play();
+        if (play && typeof play.catch === "function") play.catch(() => {
+          bgmStarted = false;
+        });
+      } catch (error) {
+        bgmStarted = false;
+      }
+    }
+
+    function toggleBgm() {
+      bgmMuted = !bgmMuted;
+      if (bgm) {
+        bgm.muted = bgmMuted;
+        if (bgmMuted) {
+          bgm.pause();
+        } else {
+          startBgm();
+        }
+      }
+      syncSoundToggle();
+      showToast(bgmMuted ? "背景音乐已静音" : "背景音乐已开启");
+    }
+
+    document.addEventListener("pointerdown", () => {
+      if (!bgmStarted) startBgm();
+    });
+
+    if (soundToggle) {
+      soundToggle.addEventListener("pointerdown", (event) => event.stopPropagation());
+      soundToggle.addEventListener("click", () => {
+        playTapSound();
+        toggleBgm();
+      });
+    }
+
+    if (posterPreviewClose) {
+      posterPreviewClose.addEventListener("click", () => {
+        playTapSound();
+        closePosterPreview();
+      });
+    }
+
+    if (posterPreview) {
+      posterPreview.addEventListener("click", (event) => {
+        if (event.target === posterPreview) closePosterPreview();
+      });
+    }
+
+    app.addEventListener("click", (event) => {
+      const nextButton = event.target.closest("[data-next]");
+      const prevButton = event.target.closest("[data-prev]");
+      const button = nextButton || prevButton;
+      if (!button || !button.closest(".screen")?.classList.contains("active")) return;
+
+      syncScreenFromActive();
+      playTapSound();
+
+      if (nextButton) {
+        const required = {
+          3: "goal",
+          4: "intimacy",
+          5: "unexpected",
+          6: "future"
+        }[state.screen];
+        if (state.screen === 2 && state.spark < 5) {
+          showToast("先点亮 5 次心动信号");
+          return;
+        }
+        if (required && !state[required]) {
+          showToast("先完成这一站选择");
+          return;
+        }
+        goTo(state.screen + 1);
+        return;
+      }
+
+      goTo(state.screen - 1);
+    });
+
+    document.getElementById("dialoguePrev").addEventListener("click", (event) => {
+      event.stopPropagation();
+      playTapSound();
+      goTo(0);
+    });
+
+    document.getElementById("dialogueNext").addEventListener("click", (event) => {
+      event.stopPropagation();
+      playTapSound();
+      goTo(2);
+    });
+
+    document.querySelectorAll("[data-choice-group]").forEach((group) => {
+      group.addEventListener("click", (event) => {
+        const button = event.target.closest(".choice");
+        if (!button) return;
+        playTapSound();
+        group.querySelectorAll(".choice").forEach((item) => item.classList.remove("selected"));
+        button.classList.add("selected");
+        if (navigator.vibrate) navigator.vibrate(12);
+        const groupName = group.dataset.choiceGroup;
+        state[groupName] = button.dataset.value;
+        state.effects[groupName] = {
+          plan: Number(button.dataset.plan || 0),
+          comm: Number(button.dataset.comm || 0),
+          protect: Number(button.dataset.protect || 0),
+          compose: Number(button.dataset.compose || 0)
+        };
+        const label = button.querySelector("strong")?.textContent || "这一站";
+        showToast(`已点亮：${label}`);
+      });
+    });
+
+    const signalButton = document.getElementById("signalButton");
+    const sparkCount = document.getElementById("sparkCount");
+    const sparkDots = document.getElementById("sparkDots");
+    const signalHint = document.getElementById("signalHint");
+    const signalProgress = document.getElementById("signalProgress");
+
+    function renderSpark() {
+      sparkCount.textContent = `${state.spark}/5`;
+      signalProgress.style.setProperty("--signal-progress", `${state.spark * 20}%`);
+      sparkDots.querySelectorAll("i").forEach((dot, index) => {
+        dot.classList.toggle("on", index < state.spark);
+      });
+      if (state.spark >= 5) {
+        state.effects.signal = { plan: 0, comm: 10, protect: 8, compose: 0 };
+        signalHint.textContent = "心动信号已同步：靠近可以有氛围，也要有确认和准备。";
+      }
+      signalCard.classList.toggle("synced", state.spark >= 5);
+      signalNext.disabled = state.spark < 5;
+    }
+
+    function showSignalBurst() {
+      signalButton.classList.remove("pop");
+      void signalButton.offsetWidth;
+      signalButton.classList.add("pop");
+      const burst = document.createElement("span");
+      burst.className = "burst";
+      burst.style.left = "50%";
+      burst.style.top = "44%";
+      signalCard.appendChild(burst);
+      setTimeout(() => burst.remove(), 650);
+
+      const words = ["确认", "准备", "尊重", "从容", "选择权"];
+      const index = state.signalClicks <= words.length
+        ? Math.max(0, state.signalClicks - 1)
+        : Math.floor(Math.random() * words.length);
+      const particle = document.createElement("span");
+      particle.className = "energy-particle";
+      particle.textContent = words[index];
+      const directions = [
+        { tx: "-112px", ty: "-128px", angle: "-34deg" },
+        { tx: "118px", ty: "-104px", angle: "34deg" },
+        { tx: "-132px", ty: "82px", angle: "-126deg" },
+        { tx: "126px", ty: "92px", angle: "126deg" },
+        { tx: "0px", ty: "-168px", angle: "0deg" }
+      ];
+      const direction = directions[index];
+      particle.style.setProperty("--tx", direction.tx);
+      particle.style.setProperty("--ty", direction.ty);
+      signalCard.appendChild(particle);
+      setTimeout(() => particle.remove(), 900);
+
+      const ray = document.createElement("span");
+      ray.className = "energy-ray";
+      ray.style.setProperty("--angle", direction.angle);
+      signalCard.appendChild(ray);
+      setTimeout(() => ray.remove(), 560);
+    }
+
+    signalButton.addEventListener("click", () => {
+      playTapSound();
+      state.signalClicks += 1;
+      state.spark = Math.min(5, state.spark + 1);
+      if (navigator.vibrate) navigator.vibrate(10);
+      showSignalBurst();
+      renderSpark();
+      showToast(state.spark >= 5 ? "心动信号已同步" : "心动信号 +1");
+    });
+
+    document.querySelectorAll("[data-supply]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        if (event.target.closest(".supply-link")) return;
+        playTapSound();
+        document.querySelectorAll("[data-supply]").forEach((item) => item.classList.remove("selected"));
+        button.classList.add("selected");
+        showToast(button.dataset.supply);
+      });
+
+      button.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        button.click();
+      });
+
+      const linkButton = button.querySelector(".supply-link");
+      linkButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        playTapSound();
+        openExternalLink(button.dataset.url);
+      });
+    });
+
+    function chooseProfile() {
+      const totals = Object.values(state.effects).reduce((sum, item) => ({
+        plan: sum.plan + item.plan,
+        comm: sum.comm + item.comm,
+        protect: sum.protect + item.protect,
+        compose: sum.compose + item.compose
+      }), { plan: 46, comm: 44, protect: 44, compose: 44 });
+      const plan = clampScore(totals.plan);
+      const comm = clampScore(totals.comm);
+      const protect = clampScore(totals.protect);
+      const compose = clampScore(totals.compose);
+      const average = Math.round((plan + comm + protect + compose) / 4);
+      let key = "master";
+
+      if (average >= 91 && protect >= 88 && comm >= 82) {
+        key = "master";
+      } else if ((state.goal === "study" || state.goal === "career") && plan >= 82) {
+        key = "world";
+      } else if (state.unexpected === "search" || state.unexpected === "professional") {
+        key = "calm";
+      } else if (state.future === "ready" || state.future === "family") {
+        key = "stable";
+      } else if (state.goal === "love" || state.intimacy === "natural" || state.intimacy === "shy") {
+        key = "free";
+      }
+
+      state.result = {
+        ...profiles[key],
+        plan,
+        comm,
+        protect,
+        compose,
+        total: average
+      };
+      return state.result;
+    }
+
+    function renderReport() {
+      const result = chooseProfile();
+      document.getElementById("resultType").textContent = result.type;
+      document.getElementById("resultCopy").textContent = result.copy;
+      document.getElementById("reportImage").src = result.reportImage;
+      document.getElementById("reportImage").alt = `${result.type}花园插画`;
+    }
+
+    function renderPoster() {
+      const result = state.result || chooseProfile();
+      const poster = document.getElementById("poster");
+      document.getElementById("posterType").textContent = result.type;
+      document.getElementById("posterCopy").textContent = result.poster;
+      document.getElementById("qrImage").src = "assets/qr-regenex-official.png";
+      poster.style.setProperty("--poster-image", `url("${result.image}")`);
+    }
+
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1700);
+    }
+
+    function showPosterPreview(url, filename) {
+      if (!posterPreview || !posterPreviewImage) return;
+      if (posterPreviewUrl && posterPreviewUrl !== url && posterPreviewUrl.startsWith("blob:")) {
+        URL.revokeObjectURL(posterPreviewUrl);
+      }
+      posterPreviewUrl = url;
+      posterPreviewImage.src = url;
+      if (posterPreviewDownload) {
+        posterPreviewDownload.href = url;
+        posterPreviewDownload.download = filename || "regenex-choice-poster.png";
+      }
+      if (posterPreviewOpen) {
+        posterPreviewOpen.href = url;
+      }
+      posterPreview.classList.add("show");
+      posterPreview.setAttribute("aria-hidden", "false");
+    }
+
+    function closePosterPreview() {
+      if (!posterPreview) return;
+      posterPreview.classList.remove("show");
+      posterPreview.setAttribute("aria-hidden", "true");
+    }
+
+    function loadCanvasImage(src) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = (window.POSTER_DATA_URIS && window.POSTER_DATA_URIS[src]) || src;
+      });
+    }
+
+    function drawCover(ctx, image, x, y, width, height) {
+      const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+      const drawWidth = image.naturalWidth * scale;
+      const drawHeight = image.naturalHeight * scale;
+      ctx.drawImage(image, x + (width - drawWidth) / 2, y + (height - drawHeight) / 2, drawWidth, drawHeight);
+    }
+
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = [...text];
+      let line = "";
+      words.forEach((word) => {
+        const testLine = line + word;
+        if (ctx.measureText(testLine).width > maxWidth && line) {
+          ctx.fillText(line, x, y);
+          line = word;
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      });
+      if (line) ctx.fillText(line, x, y);
+      return y;
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function canvasToImageSource(canvas) {
+      return new Promise((resolve, reject) => {
+        const fallbackToDataUrl = () => {
+          try {
+            resolve({ url: canvas.toDataURL("image/png"), blob: null });
+          } catch (error) {
+            reject(error);
+          }
+        };
+
+        if (!canvas.toBlob) {
+          fallbackToDataUrl();
+          return;
+        }
+
+        try {
+          canvas.toBlob((blob) => {
+            if (blob) {
+              resolve({ url: URL.createObjectURL(blob), blob });
+            } else {
+              fallbackToDataUrl();
+            }
+          }, "image/png", 1);
+        } catch (error) {
+          fallbackToDataUrl();
+        }
+      });
+    }
+
+    function savePosterImage(source, filename) {
+      showPosterPreview(source.url, filename);
+      const supportsDownload = "download" in HTMLAnchorElement.prototype;
+      const mobileLike = /iPhone|iPad|iPod|Android|MicroMessenger|MQQBrowser|Weibo/i.test(navigator.userAgent);
+
+      if (supportsDownload && !mobileLike) {
+        const link = document.createElement("a");
+        link.href = source.url;
+        link.download = filename;
+        link.rel = "noopener";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        showToast("海报已生成，可下载或右键保存");
+      } else {
+        showToast("长按图片保存海报");
+      }
+    }
+
+    document.getElementById("savePoster").addEventListener("click", async () => {
+      playTapSound();
+      const result = state.result || chooseProfile();
+      showToast("正在生成海报");
+      try {
+        const [posterImage, qrImage] = await Promise.all([
+          loadCanvasImage(result.image),
+          loadCanvasImage("assets/qr-regenex-official.png")
+        ]);
+        const canvas = document.createElement("canvas");
+        canvas.width = 1080;
+        canvas.height = 1440;
+        const ctx = canvas.getContext("2d");
+
+        drawCover(ctx, posterImage, 0, 0, canvas.width, canvas.height);
+        const topShade = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        topShade.addColorStop(0, "rgba(25, 14, 35, .18)");
+        topShade.addColorStop(.48, "rgba(25, 14, 35, .08)");
+        topShade.addColorStop(1, "rgba(25, 14, 35, .78)");
+        ctx.fillStyle = topShade;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const sideGlow = ctx.createLinearGradient(0, 0, canvas.width, 0);
+        sideGlow.addColorStop(0, "rgba(233, 22, 43, .26)");
+        sideGlow.addColorStop(.45, "rgba(233, 22, 43, 0)");
+        sideGlow.addColorStop(1, "rgba(18, 159, 226, .22)");
+        ctx.fillStyle = sideGlow;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#fffaf7";
+        ctx.font = "900 38px 'PingFang SC','Noto Sans CJK SC',Arial,sans-serif";
+        ctx.fillText("朗圣药业选择权补给站", 82, 126);
+        ctx.font = "900 84px 'PingFang SC','Noto Sans CJK SC',Arial,sans-serif";
+        ctx.fillText("我的选择权", 82, 300);
+        ctx.fillText("花园已绽放", 82, 398);
+
+        ctx.strokeStyle = "rgba(255,250,247,.76)";
+        ctx.lineWidth = 3;
+        roundRect(ctx, 82, 520, 340, 88, 44);
+        ctx.stroke();
+        ctx.font = "900 40px 'PingFang SC','Noto Sans CJK SC',Arial,sans-serif";
+        ctx.fillText(result.type, 112, 577);
+
+        ctx.fillStyle = "rgba(17,12,20,.42)";
+        roundRect(ctx, 72, 930, 820, 128, 20);
+        ctx.fill();
+        ctx.fillStyle = "#fffaf7";
+        ctx.font = "900 38px 'PingFang SC','Noto Sans CJK SC',Arial,sans-serif";
+        wrapCanvasText(ctx, result.poster, 92, 1008, 780, 52);
+
+        ctx.font = "900 42px 'PingFang SC','Noto Sans CJK SC',Arial,sans-serif";
+        ctx.fillText("亲密前，有赤尾", 82, 1210);
+        ctx.fillText("意外后，懂丹媚", 82, 1270);
+        ctx.font = "800 32px 'PingFang SC','Noto Sans CJK SC',Arial,sans-serif";
+        ctx.fillStyle = "rgba(255,250,247,.82)";
+        ctx.fillText("朗圣药业｜随心所“育”，绽放人生之美", 82, 1340);
+
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(814, 1174, 184, 184);
+        ctx.drawImage(qrImage, 830, 1190, 152, 152);
+
+        const imageSource = await canvasToImageSource(canvas);
+        savePosterImage(imageSource, `regenex-choice-${result.type}.png`);
+      } catch (error) {
+        showToast("生成失败，请使用部署链接再试");
+      }
+    });
+
+    document.getElementById("restart").addEventListener("click", () => {
+      playTapSound();
+      Object.assign(state, {
+        screen: 0,
+        goal: "",
+        intimacy: "",
+        unexpected: "",
+        future: "",
+        plan: 46,
+        comm: 44,
+        protect: 44,
+        compose: 44,
+        spark: 0,
+        signalClicks: 0,
+        effects: {},
+        result: null
+      });
+      document.querySelectorAll(".choice").forEach((item) => item.classList.remove("selected"));
+      document.querySelectorAll("[data-supply]").forEach((item, index) => item.classList.toggle("selected", index === 0));
+      signalHint.textContent = "每一次点击，都在把“心动”校准成更温柔、更清楚的选择。";
+      renderSpark();
+      goTo(0);
+    });
+
+    syncSoundToggle();
+    renderSpark();
+    if (!restoreProgress()) goTo(0);
+  </script>
+</body>
+</html>
